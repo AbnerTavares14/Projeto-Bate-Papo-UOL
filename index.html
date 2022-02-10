@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,100;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="estilos.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bate-Papo UOL</title>
+</head>
+
+<body>
+    <header>
+        <img src="logo 1.png" />
+        <ion-icon name="people-sharp"></ion-icon>
+    </header>
+    <main>
+        <section>
+            <div class="entrou">
+                <p> <time>(09:21:45)</time> <strong>João</strong> entra na sala...</p>
+            </div>
+            <div class="normal">
+                <p> <time>(09:22:28)</time> <strong class="nome">João</strong> para <strong>Todos:</strong> Bom dia</p>
+            </div>
+            <div class="normal">
+                <p> <time>(09:22:38)</time> <strong class="nome">Maria</strong> para <strong>João:</strong> Oi João :)</p>
+            </div>
+            <div class="reservada">
+                <p> <time>(09:22:48)</time> <strong class="nome">João</strong> reservadamente para <strong>Maria:</strong> Oi gatinha quer tc?</p>
+            </div>
+            <div class="entrou">
+                <p> <time>(09:22:58)</time> <strong class="nome">Maria</strong> sai da sala...</p>
+            </div>
+        </section>
+        <aside class="escondido">
+            <div class="menu">
+                <h1>Escolha um contato para enviar mensagem:</h1>
+            </div>
+            <div class="contatos">
+                <div class="todos">
+                    <ion-icon name="people-sharp"></ion-icon>
+                    <p>Todos</p>
+                </div>
+                <div class="usuario">
+                    <ion-icon name="person-circle-sharp"></ion-icon>
+                    <p>João</p>
+                </div>
+                <div class="usuario">
+                    <ion-icon name="person-circle-sharp"></ion-icon>
+                    <p>Maria</p>
+                </div>
+            </div>
+            <div class="container-visibilidade">
+                <div class="txt">
+                    <h1>Escolha a visibilidade:</h1>
+                </div>
+                <div class="visibilidade">
+                    <ion-icon name="lock-open"></ion-icon>
+                    <p>Público</p>
+                </div>
+                <div class="visibilidade">
+                    <ion-icon name="lock-closed"></ion-icon>
+                    <p>Reservadamente</p>
+                </div>
+            </div>
+        </aside>
+    </main>
+    <footer class="footer">
+        <input type="textarea" placeholder="Escreva aqui...">
+        <ion-icon onclick="enviarMensagem()" name="paper-plane-outline"></ion-icon>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
