@@ -17,12 +17,12 @@
 
 <body>
     <header>
-        <img src="logo 1.png" />
-        <ion-icon name="people-sharp"></ion-icon>
+        <img onclick="desapareceMenu()" src="logo 1.png" />
+        <ion-icon onclick="apareceMenu()" name="people-sharp"></ion-icon>
     </header>
     <main>
         <section>
-            <div class="entrou">
+            <!-- <div class="entrou">
                 <p> <time>(09:21:45)</time> <strong>João</strong> entra na sala...</p>
             </div>
             <div class="normal">
@@ -36,37 +36,42 @@
             </div>
             <div class="entrou">
                 <p> <time>(09:22:58)</time> <strong class="nome">Maria</strong> sai da sala...</p>
-            </div>
+            </div> -->
         </section>
         <aside class="escondido">
             <div class="menu">
                 <h1>Escolha um contato para enviar mensagem:</h1>
             </div>
             <div class="contatos">
-                <div class="todos">
+                <div class="todos" onclick="selecionarContato(this, 'nome0')">
                     <ion-icon name="people-sharp"></ion-icon>
-                    <p>Todos</p>
+                    <p class="nome0">Todos</p>
+                    <div class="checked-contatos escondido"><ion-icon name="checkmark-sharp"></ion-icon></div>
                 </div>
-                <div class="usuario">
+                <!-- <div class="usuario" onclick="selecionarContato(this, 'nome1')">
                     <ion-icon name="person-circle-sharp"></ion-icon>
-                    <p>João</p>
+                    <p class="nome1">João</p>
+                    <div class="checked-contatos escondido"><ion-icon name="checkmark-sharp"></ion-icon></div>
                 </div>
-                <div class="usuario">
+                <div class="usuario" onclick="selecionarContato(this, 'nome2')">
                     <ion-icon name="person-circle-sharp"></ion-icon>
-                    <p>Maria</p>
-                </div>
+                    <p class="nome2">Maria</p>
+                    <div class="checked-contatos escondido"><ion-icon name="checkmark-sharp"></ion-icon></div>
+                </div> -->
             </div>
             <div class="container-visibilidade">
                 <div class="txt">
                     <h1>Escolha a visibilidade:</h1>
                 </div>
-                <div class="visibilidade">
+                <div class="visibilidade" onclick="selecionarVisibilidade(this, 'open')">
                     <ion-icon name="lock-open"></ion-icon>
-                    <p>Público</p>
+                    <p class="open">Público</p>
+                    <div class="checked escondido"><ion-icon name="checkmark-sharp"></ion-icon></div>
                 </div>
-                <div class="visibilidade">
+                <div class="visibilidade" onclick="selecionarVisibilidade(this, 'lock')">
                     <ion-icon name="lock-closed"></ion-icon>
-                    <p>Reservadamente</p>
+                    <p class="lock">Reservadamente</p>
+                    <div class="checked escondido"><ion-icon name="checkmark-sharp"></ion-icon></div>
                 </div>
             </div>
         </aside>

@@ -157,9 +157,14 @@ aside{
     text-align: center;
 }
 
+.contatos{
+    height: 300px;
+    overflow-y: scroll;
+}
+
 .todos{
     display: flex;
-    padding: 10px;
+    padding: 10px 15px;
 }
 
 .todos ion-icon{
@@ -168,6 +173,7 @@ aside{
 }
 
 .todos p{
+    width: 150px;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 16px;
@@ -177,7 +183,7 @@ aside{
 
 .usuario{
     display: flex;
-    padding: 10px;
+    padding: 10px 15px;
 }
 
 .usuario ion-icon{
@@ -186,6 +192,7 @@ aside{
 }
 
 .usuario p{
+    width: 150px;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 16px;
@@ -211,7 +218,7 @@ aside{
 
 .visibilidade{
     display: flex;
-    padding: 10px;
+    padding: 10px 15px;
 }
 
 .visibilidade ion-icon{
@@ -220,6 +227,7 @@ aside{
 }
 
 .visibilidade p{
+    width: 150px;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     color: #000000;
@@ -230,4 +238,24 @@ aside{
 
 .escondido{
     display: none;
+}
+
+.checked{
+    width: 9px;
+}
+
+.checked ion-icon{
+    /* width: 9px;
+    height: 7px; */
+    font-size: 15px;
+    color: #28BB25;
+}
+
+.checked-contatos{
+    width: 9px;
+}
+
+.checked-contatos ion-icon{
+    font-size: 15px;
+    color: #28BB25;
 }
