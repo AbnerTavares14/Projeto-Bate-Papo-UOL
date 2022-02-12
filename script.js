@@ -35,7 +35,7 @@ promiseMensagens.then(carregarMensagens);
 function deuErro(erro) {
     if (erro.response.status === 400) {
         alert("Usuário já existe, por favor digite outro nome de usuário!");
-        informarNomeUsuario();
+        window.location.reload();
     }
 }
 
@@ -64,26 +64,51 @@ function informarHorario() {
 }
 
 
-function enviarMensagem() {
+// function enviarMensagemNormal(resposta) {
+//     console.log(resposta);
+//     const mensagem = document.querySelector("section");
+//     mensagem.innerHTML += `<div class="normal" data-identifier="message">
+//         <p> <time>(${horario})</time> <strong class="nome">${nomeDeUsuario}</strong> para <strong>${selecionado}:</strong> ${msg}</p>
+//         </div>`;
+//     // if (visibilidadeSelecionada === "Público") {
+//     //     horario = informarHorario();
+//     //     mensagem.innerHTML += `<div class="normal" data-identifier="message">
+//     //     <p> <time>(${horario})</time> <strong class="nome">${nomeDeUsuario}</strong> para <strong>${selecionado}:</strong> ${msg}</p>
+//     //     </div>`
+//     //     const input = document.querySelector("input");
+//     //     input.value = "";
+//     //     mensagem.scrollIntoView();
+//     // } else if (visibilidadeSelecionada === "Reservadamente") {
+//     //     horario = informarHorario();
+//     //     mensagem.innerHTML += `<div class="reservada" data-identifier="message">
+//     //     <p> <time>(${horario})</time> <strong class="nome">${nomeDeUsuario}</strong> reservadamente para <strong>${selecionado}:</strong> ${msg}</p>
+//     //     </div>`;
+//     //     const input = document.querySelector("input");
+//     //     input.value = "";
+//     //     mensagem.scrollIntoView();
+//     // }
+// }
+
+
+function enviarMensagensAoServidor(resposta){
     let msg = document.querySelector("input").value;
-    const mensagem = document.querySelector("section");
-    if (visibilidadeSelecionada === "Público") {
-        horario = informarHorario();
-        mensagem.innerHTML += `<div class="normal" data-identifier="message">
-        <p> <time>(${horario})</time> <strong class="nome">${nomeDeUsuario}</strong> para <strong>${selecionado}:</strong> ${msg}</p>
-        </div>`
+    if(visibilidadeSelecionada === "Público"){
+        const promiseEnvioMensagem = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", {from:nomeDeUsuario, to:selecionado, text:msg, type:"message"});
+        promiseEnvioMensagem.then(obterNovamenteMensagensdoServidor);
         const input = document.querySelector("input");
         input.value = "";
-        mensagem.scrollIntoView();
-    } else if (visibilidadeSelecionada === "Reservadamente") {
-        horario = informarHorario();
-        mensagem.innerHTML += `<div class="reservada" data-identifier="message">
-        <p> <time>(${horario})</time> <strong class="nome">${nomeDeUsuario}</strong> reservadamente para <strong>${selecionado}:</strong> ${msg}</p>
-        </div>`;
+    }else{
+        const promiseEnvioMensagem = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", {from:nomeDeUsuario, to:selecionado, text:msg, type:"private_message"});
+        promiseEnvioMensagem.then(obterNovamenteMensagensdoServidor);
         const input = document.querySelector("input");
         input.value = "";
-        mensagem.scrollIntoView();
     }
+
+}
+
+function obterNovamenteMensagensdoServidor(resposta){
+    const promiseAtualizarMensagens = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
+    promiseAtualizarMensagens.then(atualizarMensagens);
 }
 
 function carregarMensagens(resposta){
@@ -113,7 +138,6 @@ function carregarMensagens(resposta){
 function atualizarMensagens(resposta){
     const mensagem = document.querySelector("section");
     mensagem.innerHTML = "";
-    mensagem.scrollIntoView();
     for(let i = 0; i < resposta.data.length; i++){
         if(resposta.data[i].type === "message"){
             mensagem.innerHTML += `<div class="normal" data-identifier="message">
@@ -133,6 +157,7 @@ function atualizarMensagens(resposta){
             mensagem.scrollIntoView();
         }
     }
+    mensagem.scrollIntoView();
 }
 
 
@@ -152,6 +177,8 @@ function entrarNaSala(resposta) {
 function verificarSeEstaNaSala(resposta) {
     if (resposta.status === 200) {
         console.log("OK");
+    }else{
+        window.location.reload();
     }
 }
 

@@ -5,6 +5,7 @@
 
 body{
     background-color: #F3F3F3;
+    overflow-x: hidden;
 }
 
 header{
@@ -20,6 +21,7 @@ header{
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
     padding: 0 20px;
     margin-bottom: 26px;
+    z-index: 5;
 }
 
 header img{
@@ -30,6 +32,11 @@ header img{
 header ion-icon{
     width: 42px;
     font-size: 50px;
+}
+
+main{
+    width: 375px;
+    position: relative;
 }
 
 .entrou{
@@ -44,6 +51,8 @@ header ion-icon{
     line-height: 16px;
     margin-bottom: 5px;
     border-radius: 2px;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 
@@ -62,6 +71,8 @@ section{
     line-height: 16px;
     margin-bottom: 5px;
     border-radius: 2px;
+    overflow-x: hidden;
+    box-sizing: border-box;
 }
 
 .reservada{
@@ -74,6 +85,8 @@ section{
     line-height: 20px;
     margin-bottom: 5px;
     border-radius: 2px;
+    overflow-x: hidden;
+    box-sizing: border-box;
 }
 
 p{
@@ -139,6 +152,7 @@ aside{
     width: 259px;
     height: 100%;
     z-index: 10;
+    overflow: hidden;
 }
 
 .menu{
@@ -164,6 +178,7 @@ aside{
 .contatos{
     height: 300px;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .todos{
