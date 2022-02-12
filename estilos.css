@@ -8,6 +8,9 @@ body{
 }
 
 header{
+    position: fixed;
+    top: 0;
+    left: 0;
     background-color: #FFFFFF;
     width: 375px;
     height: 80px;
@@ -46,6 +49,7 @@ header ion-icon{
 
 section{
     width: auto;
+    margin-bottom: 85px;
 }
 
 .normal{

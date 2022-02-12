@@ -22,8 +22,15 @@ promise.then(mostrarParticipantes);
 setInterval(() => {
     promise = axios.get("https://mock-api.driven.com.br/api/v4/uol/participants");
     promise.then(mostrarParticipantes)
-},
-    10000);
+    },10000);
+
+let promiseMensagens = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
+promiseMensagens.then(carregarMensagens);
+
+    setInterval(() => {
+    promiseMensagens = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
+    promiseMensagens.then(atualizarMensagens);
+    },10000);
 
 function deuErro(erro) {
     if (erro.response.status === 400) {
@@ -32,16 +39,13 @@ function deuErro(erro) {
     }
 }
 
-// function verificarParticipantes(resposta){
-//     let promise3 = axios.get("https://mock-api.driven.com.br/api/v4/uol/participants");
-//     setInterval(()=>promise3.then(verificarParticipantes),10000);
-//     console.log(resposta.data);
-// }
 
 function mostrarParticipantes(resposta) {
     const incrementarMenu = document.querySelector(".contatos");
-    console.log(resposta.data);
-    incrementarMenu.innerHTML = "";
+    incrementarMenu.innerHTML = `<div class="todos" onclick="selecionarContato(this, 'nome0')">
+    <ion-icon name="people-sharp"></ion-icon>
+    <p class="nome0">Todos</p>
+    <div class="checked-contatos escondido"><ion-icon name="checkmark-sharp"></ion-icon></div>`;
     for (let i = 0; i < resposta.data.length; i++) {
         incrementarMenu.innerHTML += `<div class="usuario" onclick="selecionarContato(this, 'nome${i}')">
             <ion-icon name="person-circle-sharp"></ion-icon>
@@ -50,17 +54,6 @@ function mostrarParticipantes(resposta) {
             </div>`
     }
 }
-
-
-function criaMenu() {
-    const criandoMenu = document.querySelector(".contatos");
-    criandoMenu.innerHTML += `<div class="usuario" onclick="selecionarContato(this, '${numeroDeUsuario}')">
-    <ion-icon name="person-circle-sharp"></ion-icon>
-    <p class="${numeroDeUsuario}">${nomeDeUsuario}</p>
-    <div class="checked-contatos escondido"><ion-icon name="checkmark-sharp"></ion-icon></div>
-    </div>`
-}
-
 
 function informarHorario() {
     data = new Date();
@@ -79,14 +72,66 @@ function enviarMensagem() {
         mensagem.innerHTML += `<div class="normal" data-identifier="message">
         <p> <time>(${horario})</time> <strong class="nome">${nomeDeUsuario}</strong> para <strong>${selecionado}:</strong> ${msg}</p>
         </div>`
-        msg.value = "";
+        const input = document.querySelector("input");
+        input.value = "";
+        mensagem.scrollIntoView();
     } else if (visibilidadeSelecionada === "Reservadamente") {
         horario = informarHorario();
         mensagem.innerHTML += `<div class="reservada" data-identifier="message">
         <p> <time>(${horario})</time> <strong class="nome">${nomeDeUsuario}</strong> reservadamente para <strong>${selecionado}:</strong> ${msg}</p>
-        </div>`
+        </div>`;
         const input = document.querySelector("input");
         input.value = "";
+        mensagem.scrollIntoView();
+    }
+}
+
+function carregarMensagens(resposta){
+    const mensagem = document.querySelector("section");
+    mensagem.scrollIntoView();
+    for(let i = 0; i < resposta.data.length; i++){
+        if(resposta.data[i].type === "message"){
+            mensagem.innerHTML += `<div class="normal" data-identifier="message">
+            <p> <time>(${resposta.data[i].time})</time> <strong class="nome">${resposta.data[i].from}</strong> para <strong>${resposta.data[i].to}:</strong> ${resposta.data[i].text}</p>
+            </div>`;
+            mensagem.scrollIntoView();
+        }else if(resposta.data[i].type === "private_message"){
+            mensagem.innerHTML += `<div class="reservada" data-identifier="message">
+            <p> <time>(${resposta.data[i].time})</time> <strong class="nome">${resposta.data[i].from}</strong> reservadamente para <strong>${resposta.data[i].to}:</strong> ${resposta.data[i].text}</p>
+            </div>`;
+            mensagem.scrollIntoView();
+        }
+        else if(resposta.data[i].type === "status"){
+            mensagem.innerHTML += `<div class="entrou" data-identifier="message">
+            <p> <time>(${resposta.data[i].time})</time> <strong class="nome">${resposta.data[i].from}</strong> ${resposta.data[i].text}</p>
+            </div>`;
+            mensagem.scrollIntoView();
+        }
+    }
+}
+
+function atualizarMensagens(resposta){
+    const mensagem = document.querySelector("section");
+    mensagem.innerHTML = "";
+    mensagem.scrollIntoView();
+    for(let i = 0; i < resposta.data.length; i++){
+        if(resposta.data[i].type === "message"){
+            mensagem.innerHTML += `<div class="normal" data-identifier="message">
+            <p> <time>(${resposta.data[i].time})</time> <strong class="nome">${resposta.data[i].from}</strong> para <strong>${resposta.data[i].to}:</strong> ${resposta.data[i].text}</p>
+            </div>`;
+            mensagem.scrollIntoView();
+        }else if(resposta.data[i].type === "private_message"){
+            mensagem.innerHTML += `<div class="reservada" data-identifier="message">
+            <p> <time>(${resposta.data[i].time})</time> <strong class="nome">${resposta.data[i].from}</strong> reservadamente para <strong>${resposta.data[i].to}:</strong> ${resposta.data[i].text}</p>
+            </div>`;
+            mensagem.scrollIntoView();
+        }
+        else if(resposta.data[i].type === "status"){
+            mensagem.innerHTML += `<div class="entrou" data-identifier="message">
+            <p> <time>(${resposta.data[i].time})</time> <strong class="nome">${resposta.data[i].from}</strong> ${resposta.data[i].text}</p>
+            </div>`;
+            mensagem.scrollIntoView();
+        }
     }
 }
 
