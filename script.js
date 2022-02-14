@@ -21,7 +21,7 @@ promise.then(mostrarParticipantes);
 setInterval(() => {
     promise = axios.get("https://mock-api.driven.com.br/api/v4/uol/participants");
     promise.then(mostrarParticipantes)
-}, 10000);
+}, 5000);
 
 let promiseMensagens = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
 promiseMensagens.then(carregarMensagens);
