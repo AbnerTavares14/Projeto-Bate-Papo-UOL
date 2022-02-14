@@ -264,8 +264,15 @@ aside{
 }
 
 .checked ion-icon{
-    /* width: 9px;
-    height: 7px; */
+    font-size: 15px;
+    color: #28BB25;
+}
+
+.checked-lock{
+    width: 9px;
+}
+
+.checked-lock ion-icon{
     font-size: 15px;
     color: #28BB25;
 }
@@ -277,4 +284,8 @@ aside{
 .checked-contatos ion-icon{
     font-size: 15px;
     color: #28BB25;
+}
+
+.selecionado .escondido{
+    display: block;
 }
